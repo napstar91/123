@@ -1,23 +1,44 @@
-# Test case 1: Height is greater than 120 cm and age is less than 12
-input_height = 121
-input_age = 11
-input_photo = "Y"
-expected_output = "You can go on the ride.\nYour ticket is 5$.\nYour bill is 8$.\n"
+def test_roller_coaster():
+    # Test 1: Height less than 120 cm
+    height = 119
+    result = run_roller_coaster(height)
+    assert result == "Sorry, you are not tall enough to go on this ride.", f"Expected 'Sorry, you are not tall enough to go on this ride.' but got {result}"
 
-# Test case 2: Height is greater than 120 cm and age is between 12 and 18
-input_height = 121
-input_age = 15
-input_photo = "N"
-expected_output = "You can go on the ride.\nYour ticket is 12$.\n"
+    # Test 2: Height equal to or greater than 120 cm, age less than 12, no photo
+    height = 120
+    age = 11
+    wants_photo = "N"
+    result = run_roller_coaster(height, age, wants_photo)
+    assert result == "Your ticket price is $5\n", f"Expected 'Your ticket price is $5\n' but got {result}"
 
-# Test case 3: Height is greater than 120 cm and age is greater than 18
-input_height = 121
-input_age = 22
-input_photo = "Y"
-expected_output = "You can go on the ride.\nYour ticket is 7$.\nYour bill is 10$.\n"
+    # Test 3: Height equal to or greater than 120 cm, age between 12 and 18, no photo
+    height = 130
+    age = 16
+    wants_photo = "N"
+    result = run_roller_coaster(height, age, wants_photo)
+    assert result == "Your ticket price is $12\n", f"Expected 'Your ticket price is $12\n' but got {result}"
 
-# Test case 4: Height is less than or equal to 120 cm
-input_height = 120
-input_age = 22
-input_photo = "Y"
-expected_output = "Sorry, you're not tall enough to go on the ride.\n"
+    # Test 4: Height equal to or greater than 120 cm, age greater than 18, with photo
+    height = 140
+    age = 19
+    wants_photo = "Y"
+    result = run_roller_coaster(height, age, wants_photo)
+    assert result == "Your ticket price is $7\nYour final bill is $10\n", f"Expected 'Your ticket price is $7\nYour final bill is $10\n' but got {result}"
+
+def run_roller_coaster(height, age=None, wants_photo=None):
+    result = f"Welcome to the Roller Coaster!\nWhat is your height (in cm)? {height}\nYou can go on the ride!\n"
+    if age:
+        result += f"What is your age? {age}\n"
+    if age and age < 12:
+        result += "Your ticket price is $5\n"
+    elif age and age <= 18:
+        result += "Your ticket price is $12\n"
+    else:
+        result += "Your ticket price is $7\n"
+    if wants_photo:
+        result += f"Do you want a photo taken? (Y/N) {wants_photo}\n"
+    if wants_photo and wants_photo.upper() == "Y":
+        result += "Your final bill is $10\n"
+    return result
+
+test_roller_coaster()
