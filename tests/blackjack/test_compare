@@ -1,0 +1,12 @@
+from blackjack_game.main import compare
+
+
+def test_compare():
+    assert compare(20, 21) == "Lose, opponent has Blackjack 😱"
+    assert compare(22, 21) == "You went over. You lose 😭"
+    assert compare(20, 20) == "Draw 🙃"
+    assert compare(21, 0) == "Win with a Blackjack 😎"
+    assert compare(0, 21) == "Lose, opponent has Blackjack 😱"
+    assert compare(22, 22) == "You both went over. It's a draw 🤝"
+    assert compare(19, 18) == "You win 😃"
+    assert compare(18, 19) == "You lose 😤"
