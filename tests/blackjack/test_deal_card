@@ -1,0 +1,14 @@
+from blackjack_game.main import deal_card
+
+
+def test_deal_card():
+    current_deck = {
+        '2H': {'number': '2', 'type': '\u2665', 'weight': 2},
+        '3H': {'number': '3', 'type': '\u2665', 'weight': 3},
+        '4H': {'number': '4', 'type': '\u2665', 'weight': 4},
+    }
+
+    card_type, card, updated_deck = deal_card(current_deck)
+    assert card_type in current_deck.keys()
+    assert card_type not in updated_deck.keys()
+    assert len(current_deck) == len(updated_deck) + 1
