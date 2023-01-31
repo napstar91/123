@@ -1,0 +1,14 @@
+import copy
+
+from blackjack_game.main import deal_initial_cards
+from blackjack_game.deck import deck as fresh_deck
+
+
+def test_deal_initial_cards():
+    # Test initial deal of cards
+    current_deck = copy.deepcopy(fresh_deck)
+    user_cards, computer_cards, current_deck = deal_initial_cards(current_deck)
+
+    assert len(user_cards) == 2
+    assert len(computer_cards) == 2
+    assert len(current_deck) == 48
