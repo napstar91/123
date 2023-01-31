@@ -1,0 +1,25 @@
+from blackjack_game.deck import deck
+
+
+def test_deck_has_52_cards():
+    # Test if the deck has 52 cards
+    assert len(deck) == 52
+
+
+def test_deck_has_13_cards_of_each_type():
+    # Test if the deck has 13 cards of each type
+    assert len([card for card in deck if card.endswith('H')]) == 13
+    assert len([card for card in deck if card.endswith('D')]) == 13
+    assert len([card for card in deck if card.endswith('S')]) == 13
+    assert len([card for card in deck if card.endswith('C')]) == 13
+
+
+def test_cards_weights():
+    # Test if the weights of the cards are correct
+    for card in deck:
+        if card.startswith('A'):
+            assert deck[card]['weight'] == [1, 11]
+        elif card.startswith(('10', 'J', 'Q', 'K')):
+            assert deck[card]['weight'] == 10
+        else:
+            assert deck[card]['weight'] == int(card[0])
