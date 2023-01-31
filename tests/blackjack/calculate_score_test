@@ -1,0 +1,40 @@
+from blackjack_game.main import calculate_score
+
+
+def test_calculate_score():
+    # Test a hand with only number cards
+    hand = [
+        {'number': '2', 'type': '\u2660', 'weight': 2},
+        {'number': '3', 'type': '\u2665', 'weight': 3}
+    ]
+    assert calculate_score(hand) == 5
+
+    # Test a hand with an A and a number card
+    hand = [
+        {'number': 'A', 'type': '\u2660', 'weight': [1, 11]},
+        {'number': '3', 'type': '\u2665', 'weight': 3}
+    ]
+    assert calculate_score(hand) == 14
+
+    # Test a hand with an A, a number card and a face card
+    hand = [
+        {'number': 'A', 'type': '\u2660', 'weight': [1, 11]},
+        {'number': '3', 'type': '\u2665', 'weight': 3},
+        {'number': 'Q', 'type': '\u2666', 'weight': 10}
+    ]
+    assert calculate_score(hand) == 14
+
+    # Test a hand with an A and a Q
+    hand = [
+        {'number': 'A', 'type': '\u2660', 'weight': [1, 11]},
+        {'number': 'Q', 'type': '\u2666', 'weight': 10}
+    ]
+    assert calculate_score(hand) == 21
+
+    # Test a hand with two A's and a Q
+    hand = [
+        {'number': 'A', 'type': '\u2660', 'weight': [1, 11]},
+        {'number': 'A', 'type': '\u2666', 'weight': [1, 11]},
+        {'number': 'Q', 'type': '\u2665', 'weight': 10}
+    ]
+    assert calculate_score(hand) == 12
